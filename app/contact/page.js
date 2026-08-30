@@ -2,9 +2,18 @@ import QuoteForm from '@/components/QuoteForm';
 import FaqAccordion from '@/components/FaqAccordion';
 import { FAQS_EN, faqSchema } from '@/lib/faqs';
 
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'Contact — Call or Text 240-825-9001 | Fairweight',
-  description: 'Get a free, no-obligation quote from Fairweight. Mobile gold and silver buyer serving the DMV. Call or text 240-825-9001 for same-day cash.',
+  alternates: {
+    canonical: '/contact',
+    languages: {
+      'en-US': '/contact',
+      'es-US': '/es/contacto',
+      'x-default': '/contact',
+    },
+  },
+  title: `Contact — Call or Text ${BUSINESS.phone.display}`,
+  description: `Get a free, no-obligation quote from Fairweight. Mobile gold and silver buyer serving the DMV. Call or text ${BUSINESS.phone.display} for same-day cash.`,
 };
 
 export default function ContactPage() {
@@ -26,7 +35,7 @@ export default function ContactPage() {
             <strong>We Come To You &mdash; No Storefront Needed</strong>
             <span>Fully mobile gold &amp; silver buying across the entire DMV. Free in-person quotes at your door.</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">Call or Text 240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>Call or Text {BUSINESS.phone.display}</a>
         </div>
       </section>
 
@@ -45,7 +54,7 @@ export default function ContactPage() {
             </ul>
             <div className="quote-phone">
               <span className="small">Call or Text</span>
-              <a href="tel:+12408259001">240-825-9001</a>
+              <a href={telHref()}>{BUSINESS.phone.display}</a>
             </div>
             <div className="meet">
               <div className="portrait">
@@ -54,7 +63,7 @@ export default function ContactPage() {
               </div>
               <div className="meet-who">
                 <span className="eyebrow-sm">Meet Your Buyer</span>
-                <h4>Your Brother&rsquo;s Name</h4>
+                <h4>Jonathan Renderos</h4>
                 <span className="role">Founder &amp; Buyer</span>
                 <p>When you reach out, you deal directly with me &mdash; not a salesperson. I come to you anywhere in the DMV.</p>
               </div>
@@ -79,9 +88,9 @@ export default function ContactPage() {
           <span className="deco-label center">Ready When You Are</span>
           <h2 style={{ marginTop: 18 }}>Turn gold &amp; silver<br />into <span className="gold-text">cash today</span></h2>
           <p className="sub">Call or text us &mdash; we will come to you with a fair, no-pressure quote.</p>
-          <a className="phone-btn" href="tel:+12408259001">
+          <a className="phone-btn" href={telHref()}>
             <span className="label">Call or Text</span>
-            <span className="number">240-825-9001</span>
+            <span className="number">{BUSINESS.phone.display}</span>
           </a>
           <p className="loc">Hyattsville, MD &middot; Serving the DMV</p>
         </div>

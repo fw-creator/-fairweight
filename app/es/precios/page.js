@@ -1,10 +1,11 @@
 import PriceCards from '@/components/PriceCards';
 import Calculator from '@/components/Calculator';
 
+import { BUSINESS } from '@/lib/business';
 export const metadata = {
-  title: 'Precios del Oro y la Plata en Vivo | Fairweight',
-  description: 'Precios spot en vivo de oro, plata y platino más una calculadora de valor. Fairweight compra oro y plata en Maryland. Llame o texto 240-825-9001.',
-  alternates: { canonical: '/es/precios', languages: { 'en-US': '/prices', 'es-US': '/es/precios' } },
+  title: 'Precios del Oro y la Plata en Vivo',
+  description: `Precios spot en vivo de oro, plata y platino más una calculadora de valor. Fairweight compra oro y plata en Maryland. Llame o texto ${BUSINESS.phone.display}.`,
+  alternates: { canonical: '/es/precios', languages: { 'en-US': '/prices', 'es-US': '/es/precios', 'x-default': '/prices' } },
 };
 
 export default function PreciosEs() {

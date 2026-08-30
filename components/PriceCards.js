@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 const METALS = [
-  { key: 'XAU', card: 'gold', label: 'Gold', labelEs: 'Oro', img: '/gold-bars.png', fallback: 4400 },
-  { key: 'XAG', card: 'silver', label: 'Silver', labelEs: 'Plata', img: '/silver-bars.png', fallback: 75 },
-  { key: 'XPT', card: 'platinum', label: 'Platinum', labelEs: 'Platino', img: '/platinum-bars.png', fallback: 2000 },
+  { key: 'XAU', card: 'gold', label: 'Gold', labelEs: 'Oro', img: '/gold-bars.png' },
+  { key: 'XAG', card: 'silver', label: 'Silver', labelEs: 'Plata', img: '/silver-bars.png' },
+  { key: 'XPT', card: 'platinum', label: 'Platinum', labelEs: 'Platino', img: '/platinum-bars.png' },
 ];
 
 const STR = {
@@ -23,7 +24,10 @@ export default function PriceCards({ lang = 'en' }) {
   useEffect(() => {
     if (!prices || grewRef.current) return;
     grewRef.current = true;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setGrow(1); return; }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const id = requestAnimationFrame(() => setGrow(1));
+      return () => cancelAnimationFrame(id);
+    }
     const t0 = performance.now();
     let raf;
     const tick = (now) => {
@@ -43,16 +47,17 @@ export default function PriceCards({ lang = 'en' }) {
       let base = {};
       try { base = JSON.parse(localStorage.getItem(baseKey) || '{}'); } catch {}
       const results = {};
-      await Promise.all(METALS.map(async ({ key, fallback }) => {
+      await Promise.all(METALS.map(async ({ key }) => {
         try {
           const r = await fetch(`https://api.gold-api.com/price/${key}`);
           const d = await r.json();
-          const price = d.price ?? d.Price ?? d.ask ?? fallback;
+          const price = d.price ?? d.Price ?? d.ask;
+          if (typeof price !== 'number' || !Number.isFinite(price)) { results[key] = null; return; }
           if (!base[key]) base[key] = price;
           results[key] = { price, open: base[key] };
         } catch {
-          if (!base[key]) base[key] = fallback;
-          results[key] = { price: fallback, open: base[key] };
+          // Never invent a price. Unavailable is shown as unavailable.
+          results[key] = null;
         }
       }));
       try { localStorage.setItem(baseKey, JSON.stringify(base)); } catch {}
@@ -86,12 +91,18 @@ export default function PriceCards({ lang = 'en' }) {
           const name = lang === 'es' ? labelEs : label;
           return (
             <div key={key} className={`price-card ${card}`}>
-              <div className="pc-bars"><img src={img} alt={`${name} bars`} /></div>
+              <div className="pc-bars"><Image src={img} alt="" aria-hidden="true" width={246} height={164} sizes="246px" /></div>
               <span className="pc-metal">{name}</span>
               <div className="pc-mid">
                 <div className="pc-price-row">
-                  <span className="card-price">{p ? fmt(p.price * grow) : '$0'}</span>
-                  <span className={`card-chg ${up ? 'up' : 'down'}`}>({p ? pct(p.price, p.open) : '+0.00%'})</span>
+                  <span className="card-price">
+                    {p
+                      ? fmt(p.price * grow)
+                      : !prices
+                        ? <span className="price-loading" aria-label={lang === 'es' ? 'Cargando precio' : 'Loading price'}>&nbsp;</span>
+                        : (lang === 'es' ? 'Temporalmente no disponible' : 'Temporarily unavailable')}
+                  </span>
+                  {p ? <span className={`card-chg ${up ? 'up' : 'down'}`}>({pct(p.price, p.open)})</span> : null}
                 </div>
                 <span className="pc-live">{t.live(name)}</span>
               </div>

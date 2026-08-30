@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_EN, NAV_ES, otherLangHref } from '@/lib/nav';
 
+import { BUSINESS, telHref } from '@/lib/business';
 const METALS = [
   { key: 'XAU', label: 'Gold' },
   { key: 'XAG', label: 'Silver' },
@@ -11,7 +12,6 @@ const METALS = [
   { key: 'XPD', label: 'Palladium' },
 ];
 
-const FALLBACK = { XAU: 4400, XAG: 75, XPT: 2000, XPD: 1300 };
 
 export default function Header() {
   const pathname = usePathname();
@@ -40,12 +40,16 @@ export default function Header() {
         try {
           const r = await fetch(`https://api.gold-api.com/price/${key}`);
           const d = await r.json();
-          const price = d.price ?? d.Price ?? d.ask ?? FALLBACK[key];
+          const price = d.price ?? d.Price ?? d.ask;
+          if (typeof price !== 'number' || !Number.isFinite(price)) {
+            results[key] = null;
+            return;
+          }
           if (!base[key]) base[key] = price;
           results[key] = { price, chg: price - base[key] };
         } catch {
-          if (!base[key]) base[key] = FALLBACK[key];
-          results[key] = { price: FALLBACK[key], chg: 0 };
+          // Never show an invented price. Unavailable is shown as unavailable.
+          results[key] = null;
         }
       }));
       try { localStorage.setItem(baseKey, JSON.stringify(base)); } catch {}
@@ -63,8 +67,10 @@ export default function Header() {
     return (
       <div className="tk" key={key + label}>
         <span className="tk-name">{label}</span>
-        <span className="tk-price">{p ? fmt(p.price) : '$0'}</span>
-        <span className={`tk-chg ${p && p.chg < 0 ? 'down' : 'up'}`}>{p && p.chg < 0 ? '▼' : '▲'}</span>
+        <span className="tk-price">{p ? fmt(p.price) : (!prices ? '\u00a0' : (es ? 'No disponible' : 'Unavailable'))}</span>
+        {p ? (
+          <span className={`tk-chg ${p.chg < 0 ? 'down' : 'up'}`}>{p.chg < 0 ? '▼' : '▲'}</span>
+        ) : null}
       </div>
     );
   };
@@ -93,7 +99,10 @@ export default function Header() {
         <Link className="lang-toggle" href={altHref} aria-label={es ? 'Switch to English' : 'Cambiar a español'}>
           {es ? 'EN' : 'ES'}
         </Link>
-        <a className="nav-cta" href="tel:+12408259001"><PhoneIcon /> 240-825-9001</a>
+        <a className="nav-cta" href={telHref()}><PhoneIcon /> {BUSINESS.phone.display}</a>
+        <a className="hdr-call" href={telHref()} aria-label={es ? 'Llamar' : 'Call'}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        </a>
         <button
           className={`nav-toggle${menuOpen ? ' open' : ''}`}
           type="button"
@@ -119,7 +128,7 @@ export default function Header() {
         <Link className="lang-toggle mobile" href={altHref} onClick={() => setMenuOpen(false)}>
           {es ? 'English' : 'Español'}
         </Link>
-        <a className="btn-gold mobile-call" href="tel:+12408259001"><PhoneIcon /> {es ? 'Llame o Texto' : 'Call or Text'}: 240-825-9001</a>
+        <a className="btn-gold mobile-call" href={telHref()}><PhoneIcon /> {es ? 'Llame o Texto' : 'Call or Text'}: {BUSINESS.phone.display}</a>
       </div>
     </header>
   );

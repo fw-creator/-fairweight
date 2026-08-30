@@ -1,6 +1,15 @@
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'About — Honest Weight, Fair Dealings | Fairweight',
-  description: 'Fairweight is the DMV mobile gold and silver buyer, built on honest weight and fair dealings. Learn our story. Call or text 240-825-9001.',
+  alternates: {
+    canonical: '/about',
+    languages: {
+      'en-US': '/about',
+      'es-US': '/es/nosotros',
+      'x-default': '/about',
+    },
+  },
+  title: 'About — Honest Weight, Fair Dealings',
+  description: `Fairweight is the DMV mobile gold and silver buyer, built on honest weight and fair dealings. Learn our story. Call or text ${BUSINESS.phone.display}.`,
 };
 
 const SCALES = (
@@ -44,7 +53,7 @@ export default function AboutPage() {
               </div>
               <div className="meet-who">
                 <span className="eyebrow-sm">Meet Your Buyer</span>
-                <h4>Your Brother&rsquo;s Name</h4>
+                <h4>Jonathan Renderos</h4>
                 <span className="role">Founder &amp; Buyer</span>
                 <p>You deal directly with me &mdash; not a salesperson. Honest assessments, fair prices, and I come to you anywhere in the DMV.</p>
               </div>
@@ -62,7 +71,7 @@ export default function AboutPage() {
             <strong>We Come To You &mdash; No Storefront Needed</strong>
             <span>Fully mobile gold &amp; silver buying across the entire DMV. Free in-person quotes at your door.</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">Call or Text 240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>Call or Text {BUSINESS.phone.display}</a>
         </div>
       </section>
 

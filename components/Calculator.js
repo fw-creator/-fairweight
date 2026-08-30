@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 
+import { telHref } from '@/lib/business';
 const PURITY = {
   '24k': 0.999, '22k': 0.9167, '18k': 0.75, '14k': 0.5833, '10k': 0.4167,
   '999': 0.999, '925': 0.925, '900': 0.900,
@@ -18,8 +19,8 @@ const L = {
     metal: 'Metal', gold: 'Gold', silver: 'Silver', platinum: 'Platinum',
     spot: 'Spot price (USD per troy oz)', amount: 'Amount', unit: 'Unit', purity: 'Purity',
     grams: 'Grams', ozt: 'Troy ounces', dwt: 'Pennyweight (dwt)', kg: 'Kilograms',
-    result: 'Offers start around', badge: 'Estimate only', caption: 'Not your final price — your real offer is set in person.', enter: 'Enter an amount to see an estimate.',
-    disclaimer: 'A starting estimate based on today’s market rate — your exact offer depends on testing your items and is often higher. It excludes numismatic or designer premiums, and your in-person quote is always free.',
+    result: 'Offers start around', badge: 'Educational estimate — not a purchase offer', caption: 'Not your final price — your real offer is set in person.', enter: 'Enter an amount to see an estimate.',
+    disclaimer: 'A starting estimate based on today’s market rate — your exact offer depends on testing and verifying your items. It excludes numismatic or designer premiums, and your in-person quote is always free.',
     cta: 'Get Your Exact Offer', at: 'at',
   },
   es: {
@@ -27,8 +28,8 @@ const L = {
     metal: 'Metal', gold: 'Oro', silver: 'Plata', platinum: 'Platino',
     spot: 'Precio spot (USD por onza troy)', amount: 'Cantidad', unit: 'Unidad', purity: 'Pureza',
     grams: 'Gramos', ozt: 'Onzas troy', dwt: 'Pennyweight (dwt)', kg: 'Kilogramos',
-    result: 'Ofertas desde aprox.', badge: 'Solo un estimado', caption: 'No es el precio final — su oferta real se define en persona.', enter: 'Ingrese una cantidad para ver un estimado.',
-    disclaimer: 'Un estimado inicial según la tasa del mercado de hoy — su oferta exacta depende de la prueba de sus artículos y a menudo es más alta. Excluye primas numismáticas o de diseñador, y su cotización en persona siempre es gratis.',
+    result: 'Ofertas desde aprox.', badge: 'Estimado educativo — no es una oferta de compra', caption: 'No es el precio final — su oferta real se define en persona.', enter: 'Ingrese una cantidad para ver un estimado.',
+    disclaimer: 'Un estimado inicial según la tasa del mercado de hoy — su oferta exacta depende de la prueba y verificación de sus artículos. Excluye primas numismáticas o de diseñador, y su cotización en persona siempre es gratis.',
     cta: 'Obtenga su Oferta Exacta', at: 'a',
   },
 };
@@ -119,7 +120,7 @@ export default function Calculator({ lang = 'en' }) {
         <span className="est-caption">{t.caption}</span>
         <span className="rsub">{sub}</span>
         <p className="disclaimer">{t.disclaimer}</p>
-        <a className="btn-gold" href="tel:+12408259001">{t.cta}</a>
+        <a className="btn-gold" href={telHref()}>{t.cta}</a>
       </div>
     </div>
   );

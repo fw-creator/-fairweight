@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+import { telHref } from '@/lib/business';
 const KARATS = [
   { k: '10k', f: 0.4167 },
   { k: '14k', f: 0.5833 },
@@ -17,19 +18,19 @@ const PAYOUT_RATE = 0.70;
 const T = {
   en: {
     eyebrow: 'Try it', title: "What's it worth?",
-    sub: 'Slide your weight and karat for a live estimate.',
+    sub: 'Slide your weight and karat for a live estimate. Educational estimate — not a purchase offer.',
     gold: 'Gold', silver: 'Silver', sterling: 'Sterling .925',
     weight: 'Weight', grams: 'grams', est: 'Offers start around',
-    badge: 'Estimate only', caption: 'Not your final price — your real offer is set in person.',
-    cta: 'Get your exact offer', note: 'A starting estimate based on today’s market rate — your exact offer depends on testing your items, and is often higher. In-person quotes are always free.',
+    badge: 'Educational estimate — not a purchase offer', caption: 'Not your final price — your real offer is set in person.',
+    cta: 'Get your exact offer', note: 'A starting estimate based on today’s market rate — your exact offer depends on testing and verifying your items. In-person quotes are always free.',
   },
   es: {
     eyebrow: 'Pruébelo', title: '¿Cuánto vale?',
-    sub: 'Deslice el peso y los quilates para un estimado en vivo.',
+    sub: 'Deslice el peso y los quilates para un estimado en vivo. Estimado educativo — no es una oferta de compra.',
     gold: 'Oro', silver: 'Plata', sterling: 'Esterlina .925',
     weight: 'Peso', grams: 'gramos', est: 'Ofertas desde aprox.',
-    badge: 'Solo un estimado', caption: 'No es el precio final — su oferta real se define en persona.',
-    cta: 'Obtenga su oferta exacta', note: 'Un estimado inicial según la tasa del mercado de hoy — su oferta exacta depende de la prueba de sus artículos, y a menudo es más alta. Las cotizaciones en persona siempre son gratis.',
+    badge: 'Estimado educativo — no es una oferta de compra', caption: 'No es el precio final — su oferta real se define en persona.',
+    cta: 'Obtenga su oferta exacta', note: 'Un estimado inicial según la tasa del mercado de hoy — su oferta exacta depende de la prueba y verificación de sus artículos. Las cotizaciones en persona siempre son gratis.',
   },
 };
 
@@ -118,7 +119,7 @@ export default function Estimator({ lang = 'en' }) {
         <span className="est-caption">{t.caption}</span>
       </div>
 
-      <a className="btn-gold est-cta" href="tel:+12408259001">{t.cta}</a>
+      <a className="btn-gold est-cta" href={telHref()}>{t.cta}</a>
       <p className="est-note">{t.note}</p>
     </div>
   );

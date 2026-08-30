@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { CITIES, getCity } from '@/lib/cities';
 import CityPage from '@/components/CityPage';
 
+import { BUSINESS } from '@/lib/business';
 export function generateStaticParams() {
   return CITIES.map((c) => ({ city: c.slug }));
 }
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }) {
   const { city: slug } = await params;
   const city = getCity(slug);
   if (!city) return {};
-  const title = `Compramos Oro y Plata en ${city.name}, MD | Fairweight`;
-  const description = `${city.es.lede} Comprador móvil de oro y plata en ${city.name}, ${city.county}. Llame o texto 240-825-9001.`;
+  const title = `Compramos Oro y Plata en ${city.name}, MD`;
+  const description = `${city.es.lede} Comprador móvil de oro y plata en ${city.name}, ${city.county}. Llame o texto ${BUSINESS.phone.display}.`;
   return {
     title,
     description,
@@ -20,9 +21,10 @@ export async function generateMetadata({ params }) {
       languages: {
         'en-US': `/sell-gold/${city.slug}`,
         'es-US': `/es/vender-oro/${city.slug}`,
+        'x-default': `/sell-gold/${city.slug}`,
       },
     },
-    openGraph: { title, description, url: `https://fairweightdmv.com/es/vender-oro/${city.slug}`, locale: 'es_US' },
+    openGraph: { title, description, url: `${BUSINESS.site.canonicalOrigin}/es/vender-oro/${city.slug}`, locale: 'es_US' },
   };
 }
 
@@ -38,22 +40,22 @@ export default async function Page({ params }) {
     provider: {
       '@type': 'JewelryStore',
       name: 'Fairweight',
-      telephone: '+1-240-825-9001',
-      url: 'https://fairweightdmv.com',
+      telephone: `+1-${BUSINESS.phone.display}`,
+      url: BUSINESS.site.canonicalOrigin,
       address: { '@type': 'PostalAddress', addressLocality: 'Hyattsville', addressRegion: 'MD', addressCountry: 'US' },
     },
     areaServed: { '@type': 'City', name: `${city.name}, MD` },
     availableLanguage: ['Spanish', 'English'],
-    url: `https://fairweightdmv.com/es/vender-oro/${city.slug}`,
+    url: `${BUSINESS.site.canonicalOrigin}/es/vender-oro/${city.slug}`,
   };
 
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://fairweightdmv.com/es' },
-      { '@type': 'ListItem', position: 2, name: 'Área de Servicio', item: 'https://fairweightdmv.com/es/area' },
-      { '@type': 'ListItem', position: 3, name: `Compramos Oro en ${city.name}`, item: `https://fairweightdmv.com/es/vender-oro/${city.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${BUSINESS.site.canonicalOrigin}/es` },
+      { '@type': 'ListItem', position: 2, name: 'Área de Servicio', item: `${BUSINESS.site.canonicalOrigin}/es/area` },
+      { '@type': 'ListItem', position: 3, name: `Compramos Oro en ${city.name}`, item: `${BUSINESS.site.canonicalOrigin}/es/vender-oro/${city.slug}` },
     ],
   };
 

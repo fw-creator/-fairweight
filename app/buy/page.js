@@ -1,8 +1,17 @@
 import Link from 'next/link';
 
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'What We Buy — Gold, Silver & Platinum | Fairweight',
-  description: 'Fairweight buys gold, silver and platinum in any form — coins, bullion, jewelry, chains, scrap and broken pieces — across the DMV. Call or text 240-825-9001.',
+  alternates: {
+    canonical: '/buy',
+    languages: {
+      'en-US': '/buy',
+      'es-US': '/es/que-compramos',
+      'x-default': '/buy',
+    },
+  },
+  title: 'What We Buy — Gold, Silver & Platinum',
+  description: `Fairweight buys gold, silver and platinum in any form — coins, bullion, jewelry, chains, scrap and broken pieces — across the DMV. Call or text ${BUSINESS.phone.display}.`,
 };
 
 const GALLERY = [
@@ -42,7 +51,7 @@ export default function BuyPage() {
             <strong>We Come To You &mdash; No Storefront Needed</strong>
             <span>Fully mobile gold &amp; silver buying across the entire DMV. Free in-person quotes at your door.</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">Call or Text 240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>Call or Text {BUSINESS.phone.display}</a>
         </div>
       </section>
 
@@ -70,7 +79,7 @@ export default function BuyPage() {
             <h2 className="section-title">We buy &amp; sell<br /><span className="gold-text">premium bullion</span></h2>
             <p className="lede">From 1&nbsp;oz bars to American Gold Eagles, Krugerrands, and Maple Leafs &mdash; we deal in the world&rsquo;s most trusted gold and silver products. Bring yours in for a live, spot-based offer, or let us help you buy.</p>
             <div className="bullion-actions">
-              <a className="btn-gold" href="tel:+12408259001">
+              <a className="btn-gold" href={telHref()}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
                 Sell or Buy Bullion
               </a>
@@ -113,7 +122,7 @@ export default function BuyPage() {
               <span className="num">01</span>
               <span className="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
               <h3>Contact Us</h3>
-              <p>Call or text 240-825-9001 and tell us what you have.</p>
+              <p>Call or text {BUSINESS.phone.display} and tell us what you have.</p>
             </div>
             <div className="step reveal">
               <span className="num">02</span>

@@ -1,226 +1,127 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import PriceCards from '@/components/PriceCards';
+import Link from 'next/link';
 import Estimator from '@/components/Estimator';
+import FaqAccordion from '@/components/FaqAccordion';
+import { BUSINESS, telHref } from '@/lib/business';
+
+export const metadata = {
+  title: 'Sell Gold & Silver in Silver Spring, MD | Mobile Gold Buyer',
+  description: `Fairweight is a mobile gold and silver buyer serving Silver Spring, Maryland. We come to you for transparent evaluations with no pressure or obligation. Call or text ${BUSINESS.phone.display}.`,
+  keywords: ['sell gold Silver Spring MD', 'gold buyer Silver Spring', 'cash for gold Silver Spring Maryland', 'silver buyer Silver Spring MD', 'mobile gold buyer Silver Spring', 'sell jewelry Silver Spring'],
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Fairweight — Mobile Gold & Silver Buyer in Silver Spring, MD',
+    description: 'Gold and silver evaluations brought to you in Silver Spring and across Maryland, Northern Virginia, and Washington, DC.',
+    url: '/',
+  },
+};
+
+const BUY_CARDS = [
+  { symbol: 'Au', title: 'Gold Jewelry', detail: 'Chains, rings, bracelets and earrings', meta: '10K–24K' },
+  { symbol: 'Au', title: 'Broken Gold', detail: 'Snapped chains, single earrings and scrap', meta: 'Any condition' },
+  { symbol: 'Ag', title: 'Sterling Silver', detail: 'Jewelry, flatware and household silver', meta: '.925 & coin silver' },
+  { symbol: '¢', title: 'Coins', detail: 'Gold and silver coins and collections', meta: 'Single or estate' },
+  { symbol: 'Pt', title: 'Platinum', detail: 'Bands, settings and precious-metal scrap', meta: 'Tested on site' },
+  { symbol: '◆', title: 'Estate Collections', detail: 'Mixed inherited jewelry reviewed piece by piece', meta: 'No rush' },
+];
+
+const SERVICE_AREAS = [
+  ['Silver Spring', '/sell-gold/silver-spring'], ['Takoma Park', '/sell-gold/takoma-park'],
+  ['Wheaton', '/sell-gold/wheaton'], ['Hyattsville', '/sell-gold/hyattsville'],
+  ['College Park', '/sell-gold/college-park'], ['Bowie', '/sell-gold/bowie'],
+];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="hero" id="hero" data-hero="photo">
-        <div className="hero-bg-grad" aria-hidden="true" />
-        <div className="hero-variant v-photo">
-          <div className="photo-scrim" aria-hidden="true" />
-          <div className="wrap photo-inner">
-            <span className="deco-label">The DMV&rsquo;s Mobile Gold &amp; Silver Buyer</span>
-            <h1>We Buy &amp; Sell <span className="gold-text">Gold &amp; Silver</span></h1>
-            <p className="hero-lede">Honest weight, fair prices, and same-day cash &mdash; we come to you, anywhere in the DMV. Free in-person quotes, no pressure, no obligation.</p>
-            <span className="mobile-badge">
-              <svg viewBox="0 0 24 24"><path d="M2 7h11v8H2z"/><path d="M13 10h4l3 3v2h-7z"/><circle cx="6" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
-              We Come To You &middot; Fully Mobile
-            </span>
-            <div className="subhead">
-              <span>Mobile</span><span className="dot" /><span>Cash</span><span className="dot" /><span>Fair</span>
+      <section className="home-intro" id="hero">
+        <div className="wrap home-intro-inner">
+          <div className="home-intro-copy">
+            <p className="home-kicker">We Come to You</p>
+            <h1>We Buy Gold &amp; Silver<br />in <span>Silver Spring, MD.</span></h1>
+            <p className="home-lede">Sell <strong>gold jewelry</strong>, <strong>broken gold</strong>, <strong>sterling silver</strong> and <strong>coins</strong> from the comfort of home. Serving Maryland, Northern Virginia, and Washington, DC.</p>
+            <div className="home-actions">
+              <Link className="home-primary" href="/contact">Schedule a Private Evaluation</Link>
+              <a className="home-secondary" href={telHref()}><PhoneIcon />Call or Text</a>
             </div>
-            <div className="hero-actions">
-              <a className="btn-gold" href="tel:+12408259001">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
-                <span>Call or Text:&nbsp;<span className="num">240-825-9001</span></span>
-              </a>
-              <Link className="btn-ghost" href="/contact">Get a Free Quote</Link>
+            <div className="hero-trust" aria-label="Fairweight trust highlights">
+              <div className="hero-trust-card google-trust"><span className="google-mark" aria-hidden="true">G</span><span><strong aria-label="Five stars">★★★★★</strong><small>Reviews on Google</small></span></div>
+              <div className="hero-trust-card testing-trust"><ShieldIcon /><span><strong>Transparent Testing</strong><small>Weighed in front of you</small></span></div>
             </div>
+          </div>
+          <div className="evaluation-card">
+            <Image src="/evaluation-acid-test.png" alt="Fairweight mobile gold buyer testing gold jewelry during a private evaluation in Silver Spring, Maryland" fill priority fetchPriority="high" sizes="(max-width: 760px) calc(100vw - 40px), 540px" quality={88} />
+            <span className="come-to-you-badge"><span aria-hidden="true">⌂</span><strong>We Come<br />to You</strong></span>
           </div>
         </div>
       </section>
 
-      {/* Mobile strip */}
-      <section className="mobile-strip">
-        <div className="wrap">
-          <span className="ms-ic">
-            <svg viewBox="0 0 24 24"><path d="M2 7h11v8H2z"/><path d="M13 10h4l3 3v2h-7z"/><circle cx="6" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg>
-          </span>
-          <span className="ms-text">
-            <strong>We Come To You &mdash; No Storefront Needed</strong>
-            <span>Fully mobile gold &amp; silver buying across the entire DMV. Free in-person quotes at your door.</span>
-          </span>
-          <a className="ms-cta" href="tel:+12408259001">Call or Text 240-825-9001</a>
+      <section className="ease-strip" aria-label="Why Fairweight feels easier">
+        <div className="wrap ease-grid">
+          <div><EyeIcon /><span><strong>Open Testing</strong><small>Watch every item</small></span></div>
+          <div><ScaleIcon /><span><strong>Visible Scale</strong><small>The display faces you</small></span></div>
+          <div><ShieldIcon /><span><strong>No Obligation</strong><small>You decide</small></span></div>
+          <div><PersonIcon /><span><strong>Family-Led</strong><small>Direct local service</small></span></div>
         </div>
       </section>
 
-      {/* Worth estimator */}
-      <section className="band">
+      <section className="home-section buyer-section">
+        <div className="wrap buyer-grid">
+          <div className="buyer-mark" aria-hidden="true"><span>FW</span><small>Honest Weight</small></div>
+          <div className="buyer-copy"><p className="section-eyebrow">Meet the People Behind Fairweight</p><h2>A local, family-led service.</h2><p>Your appointment is handled directly by <strong>Jonathan or his wife</strong>—and for some evaluations, they come together. You are dealing with the family behind Fairweight, not a commissioned salesperson. Your items are tested openly, the weight is visible, and every part of the offer is explained.</p><div className="buyer-promises"><span>Family-led</span><span>English &amp; Spanish</span><span>No pressure</span></div><Link className="text-link" href="/about">Learn more about Fairweight <span>→</span></Link></div>
+        </div>
+      </section>
+
+      <section className="home-section buy-section" id="what-we-buy">
         <div className="wrap">
+          <SectionHeading eyebrow="What We Buy" title="Gold, silver, broken or forgotten." text="If it contains precious metal, it may still have value. We test every item and explain what you have." />
+          <div className="buy-rail" aria-label="Items Fairweight buys">
+            {BUY_CARDS.map((item) => <article className="buy-card" key={item.title}><div className="buy-symbol">{item.symbol}</div><span className="buy-meta">{item.meta}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}
+          </div>
+          <div className="section-actions"><Link className="home-secondary compact" href="/buy">See Everything We Buy</Link><a className="text-link" href={telHref()}>Not sure what you have? Call or text us <span>→</span></a></div>
+        </div>
+      </section>
+
+      <section className="home-section process-section" id="how-it-works">
+        <div className="wrap">
+          <SectionHeading eyebrow="Simple From Start to Finish" title="A private gold evaluation in three steps." />
+          <div className="process-grid">
+            <article><span className="process-num">01</span><h3>Call or Schedule</h3><p>Tell us roughly what you have and choose a convenient time and meeting place.</p></article>
+            <article><span className="process-num">02</span><h3>We Test &amp; Weigh</h3><p>Every item is checked in front of you. The scale stays visible throughout the evaluation.</p></article>
+            <article><span className="process-num">03</span><h3>You Decide</h3><p>We explain the offer clearly. Accept it or keep your items—there is no obligation.</p></article>
+          </div>
+          <Link className="home-primary process-cta" href="/contact">Schedule an Evaluation</Link>
+        </div>
+      </section>
+
+      <section className="home-section estimator-section">
+        <div className="wrap">
+          <SectionHeading eyebrow="Know Before We Meet" title="See what the live market is doing." text="Use the same current market reference shown in the ticker above. Your final offer depends on purity, weight and the individual item." />
           <Estimator lang="en" />
         </div>
       </section>
 
-      {/* About intro */}
-      <section className="band light" id="about-intro">
-        <div className="wrap story-grid">
-          <div className="story-copy reveal">
-            <span className="deco-label">Established in the DMV</span>
-            <h2 className="section-title">Trusted Dealers.<br /><span className="gold-text">Fair Prices.</span></h2>
-            <p>Welcome to Fairweight &mdash; the DMV&rsquo;s mobile gold &amp; silver buyer, based in Hyattsville, MD. We buy and sell gold, silver, and platinum with a commitment to complete transparency, and we come to you.</p>
-            <p>We weigh and test every item right in front of you, then price it from the live market rate &mdash; no guesswork, no pressure, no surprises. Just honest weight and fair dealings.</p>
-            <div className="bullion-actions" style={{ marginTop: 30 }}>
-              <Link className="btn-gold" href="/about">Our Story</Link>
-              <Link className="btn-ghost" href="/contact">Contact Us</Link>
-            </div>
-            <div className="meet">
-              <div className="portrait">
-                <span className="gk-border" aria-hidden="true" />
-                <div className="img-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontSize: '0.72rem', letterSpacing: '0.1em' }}>PHOTO</div>
-              </div>
-              <div className="meet-who">
-                <span className="eyebrow-sm">Meet Your Buyer</span>
-                <h4>Your Brother&rsquo;s Name</h4>
-                <span className="role">Founder &amp; Buyer</span>
-                <p>When you reach out, you deal directly with me &mdash; not a salesperson. Honest assessments, fair prices, and I come to you anywhere in the DMV.</p>
-              </div>
-            </div>
-          </div>
-          <div className="story-media reveal">
-            <span className="gk-border" aria-hidden="true" />
-            <div className="img-wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--muted)', fontSize: '0.72rem', letterSpacing: '0.1em' }}>PHOTO</div>
-          </div>
+      <section className="home-section local-section">
+        <div className="wrap local-grid">
+          <div className="local-copy"><p className="section-eyebrow">Mobile Gold Buyer Near You</p><h2>Based in Maryland. Serving the wider DMV.</h2><p>Fairweight provides mobile gold and silver evaluations in Silver Spring and communities throughout Maryland, Northern Virginia, and Washington, DC. We meet at your home or another location you prefer.</p><Link className="home-secondary compact" href="/area">View Our Full Service Area</Link></div>
+          <div className="city-links" aria-label="Popular service locations">{SERVICE_AREAS.map(([name, href]) => <Link href={href} key={name}><span>{name}</span><span>→</span></Link>)}</div>
         </div>
       </section>
 
-      {/* Live prices */}
-      <section className="band alt" id="spot">
-        <div className="wrap">
-          <div className="band-head reveal">
-            <span className="deco-label center">Live Pricing</span>
-            <h2 className="section-title">Today&rsquo;s spot prices</h2>
-          </div>
-          <PriceCards />
-          <div style={{ textAlign: 'center', marginTop: 34 }}>
-            <Link className="btn-ghost" href="/prices">See full live prices &amp; calculator</Link>
-          </div>
-        </div>
+      <section className="home-section faq-section">
+        <div className="wrap"><SectionHeading eyebrow="Before You Sell" title="Questions people ask us." text="Straight answers about testing, appointments, items we buy and what happens during an evaluation." /><FaqAccordion lang="en" /></div>
       </section>
 
-      {/* What We Do */}
-      <section className="band light" id="what">
-        <div className="wrap">
-          <div className="band-head reveal">
-            <span className="deco-label center">What We Do</span>
-            <h2 className="section-title">Trusted service, on your terms</h2>
-            <div className="ornament"><i /><span className="dia" /><i /></div>
-          </div>
-          <div className="cards-4">
-            <div className="card reveal">
-              <span className="ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="11.5" height="8.5" rx="1"/><path d="M13.5 9.5H18l3.5 3.5v2.5h-8z"/><circle cx="6.4" cy="17.4" r="1.9"/><circle cx="17" cy="17.4" r="1.9"/></svg></span>
-              <h3>We Come<br />To You</h3>
-              <p>Fully mobile service across the DMV. We meet you at home or a place you trust &mdash; no driving around.</p>
-            </div>
-            <div className="card reveal">
-              <span className="ic"><svg viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="19" height="9.5" rx="1.4"/><path d="M5.5 5.5h13"/><circle cx="12" cy="12.2" r="2.6"/><line x1="12" y1="9.4" x2="12" y2="15"/><path d="M13.2 10.3a1.4 1.4 0 0 0-1.2-.6c-.9 0-1.4.5-1.4 1.1 0 1.4 2.8.7 2.8 2.1 0 .7-.6 1.2-1.5 1.2a1.5 1.5 0 0 1-1.3-.7"/></svg></span>
-              <h3>We Pay<br />Cash</h3>
-              <p>Instant payment in cash, on the spot. No checks, no holds &mdash; your money, right away.</p>
-            </div>
-            <div className="card reveal">
-              <span className="ic"><svg viewBox="0 0 24 24"><rect x="2.6" y="9" width="11" height="6" rx="3"/><rect x="10.4" y="9" width="11" height="6" rx="3"/></svg></span>
-              <h3>New, Used,<br />Old &amp; Broken</h3>
-              <p>We buy gold &amp; silver in any condition &mdash; coins, chains, rings, scrap and broken pieces.</p>
-            </div>
-            <div className="card reveal">
-              <span className="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.4" r="2.5"/><path d="M9.6 8.4h4.8l-1.2 3.4H10.8z"/><path d="M8 18.6c0-2.8 1.4-4.4 2.6-6.8h2.8c1.2 2.4 2.6 4 2.6 6.8z"/><line x1="6.4" y1="20.2" x2="17.6" y2="20.2"/></svg></span>
-              <h3>We Pay Off<br />Pawned Items</h3>
-              <p>We pay off your pawned gold &amp; silver &mdash; <span className="accent">and pay you on top</span> of what&rsquo;s owed.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="band alt" id="how">
-        <div className="wrap">
-          <div className="band-head reveal">
-            <span className="deco-label center">How It Works</span>
-            <h2 className="section-title">Three simple steps</h2>
-            <div className="ornament"><i /><span className="dia" /><i /></div>
-          </div>
-          <div className="steps">
-            <div className="step reveal">
-              <span className="num">01</span>
-              <span className="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></span>
-              <h3>Contact Us</h3>
-              <p>Call or text 240-825-9001 and tell us what you have.</p>
-            </div>
-            <div className="step reveal">
-              <span className="num">02</span>
-              <span className="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-              <h3>We Come To You</h3>
-              <p>We meet you, weigh your items openly, and give a fair quote.</p>
-            </div>
-            <div className="step reveal">
-              <span className="num">03</span>
-              <span className="step-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="1.6"/><circle cx="12" cy="12" r="2.7"/></svg></span>
-              <h3>Get Paid Cash</h3>
-              <p>Accept the offer and walk away with cash in hand &mdash; same visit.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Explore */}
-      <section className="band light">
-        <div className="wrap">
-          <div className="band-head reveal">
-            <span className="deco-label center">Explore</span>
-            <h2 className="section-title">Everything Fairweight</h2>
-          </div>
-          <div className="cards-4">
-            <Link className="card reveal" href="/prices" style={{ textDecoration: 'none' }}>
-              <span className="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-8"/><path d="M16 8h5v5"/></svg></span>
-              <h3>Live Prices</h3>
-              <p>Today&rsquo;s gold, silver &amp; platinum spot prices, plus a value calculator.</p>
-            </Link>
-            <Link className="card reveal" href="/buy" style={{ textDecoration: 'none' }}>
-              <span className="ic"><svg viewBox="0 0 24 24"><rect x="2.6" y="9" width="11" height="6" rx="3"/><rect x="10.4" y="9" width="11" height="6" rx="3"/></svg></span>
-              <h3>What We Buy</h3>
-              <p>Coins, bullion, jewelry, scrap and broken pieces &mdash; in any condition.</p>
-            </Link>
-            <Link className="card reveal" href="/area" style={{ textDecoration: 'none' }}>
-              <span className="ic"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-              <h3>Service Area</h3>
-              <p>Fully mobile across Maryland, DC and Northern Virginia.</p>
-            </Link>
-            <Link className="card reveal" href="/about" style={{ textDecoration: 'none' }}>
-              <span className="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg></span>
-              <h3>About Us</h3>
-              <p>Honest weight, fair dealings &mdash; the principles behind Fairweight.</p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Scripture */}
-      <section className="scripture">
-        <div className="wrap inner reveal">
-          <span className="scales-lg" aria-hidden="true">
-            <svg className="scales" width="58" height="58" viewBox="0 0 24 24"><path d="M12 6.2C10 4.6 7 4.4 4 5v13c3-.6 6-.4 8 1.2"/><path d="M12 6.2C14 4.6 17 4.4 20 5v13c-3-.6-6-.4-8 1.2"/><line x1="12" y1="6.2" x2="12" y2="19.2"/><path d="M6.4 8.4c1.4-.3 2.8-.3 3.8.2M6.4 11c1.4-.3 2.8-.3 3.8.2M13.8 8.6c1-.5 2.4-.5 3.8-.2M13.8 11.2c1-.5 2.4-.5 3.8-.2"/></svg>
-          </span>
-          <span className="scripture-label">Proverbs 11:1</span>
-          <blockquote>&ldquo;A false balance is abomination to the Lord: but a <span className="gold-text">just weight</span> is his delight.&rdquo;</blockquote>
-          <cite>Honest Weight &middot; Fair Dealings</cite>
-        </div>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="contact">
-        <div className="wrap reveal">
-          <span className="deco-label center">Ready When You Are</span>
-          <h2 style={{ marginTop: 18 }}>Turn gold &amp; silver<br />into <span className="gold-text">cash today</span></h2>
-          <p className="sub">Call or text us &mdash; we will come to you with a fair, no-pressure quote.</p>
-          <a className="phone-btn" href="tel:+12408259001">
-            <span className="label">Call or Text</span>
-            <span className="number">240-825-9001</span>
-          </a>
-          <p className="loc">Hyattsville, MD &middot; Serving the DMV</p>
-        </div>
+      <section className="home-final-cta">
+        <div className="wrap"><p className="section-eyebrow">Ready When You Are</p><h2>Find out what your gold is worth.</h2><p>Call, text, or schedule a mobile evaluation in Silver Spring and the surrounding region.</p><div className="home-actions final-actions"><Link className="home-primary" href="/contact">Schedule an Evaluation</Link><a className="home-secondary dark" href={telHref()}><PhoneIcon />{BUSINESS.phone.display}</a></div></div>
       </section>
     </>
   );
 }
+
+function SectionHeading({ eyebrow, title, text }) { return <div className="home-section-head"><p className="section-eyebrow">{eyebrow}</p><h2>{title}</h2>{text ? <p>{text}</p> : null}</div>; }
+function PhoneIcon() { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>; }
+function ShieldIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></svg>; }
+function EyeIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>; }
+function ScaleIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 19l1.2-9h9.6l1.2 9M9 10a3 3 0 0 1 6 0"/><path d="m12 10 2-2"/></svg>; }
+function PersonIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg>; }

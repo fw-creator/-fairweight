@@ -1,7 +1,8 @@
+import { BUSINESS } from '@/lib/business';
 export const metadata = {
-  title: 'Nosotros — Peso Honesto, Tratos Justos | Fairweight',
-  description: 'Fairweight es el comprador móvil de oro y plata de Maryland, construido sobre peso honesto y tratos justos. Conozca nuestra historia. Llame o texto 240-825-9001.',
-  alternates: { canonical: '/es/nosotros', languages: { 'en-US': '/about', 'es-US': '/es/nosotros' } },
+  title: 'Nosotros — Peso Honesto, Tratos Justos',
+  description: `Fairweight es el comprador móvil de oro y plata de Maryland, construido sobre peso honesto y tratos justos. Conozca nuestra historia. Llame o texto ${BUSINESS.phone.display}.`,
+  alternates: { canonical: '/es/nosotros', languages: { 'en-US': '/about', 'es-US': '/es/nosotros', 'x-default': '/about' } },
 };
 
 export default function NosotrosEs() {
@@ -31,7 +32,7 @@ export default function NosotrosEs() {
               </div>
               <div className="meet-who">
                 <span className="eyebrow-sm">Conozca a su Comprador</span>
-                <h4>El Nombre de su Hermano</h4>
+                <h4>Jonathan Renderos</h4>
                 <span className="role">Fundador y Comprador</span>
                 <p>Trata directamente conmigo — no con un vendedor. Evaluaciones honestas, precios justos, y voy a usted en toda Maryland.</p>
               </div>

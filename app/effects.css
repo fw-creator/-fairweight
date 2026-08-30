@@ -5,11 +5,11 @@
 /* ---- Subtle luxury hero texture (no image) ---- */
 .hero .hero-bg-grad::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background-image: repeating-linear-gradient(135deg, rgba(216,178,63,0.035) 0 1px, transparent 1px 8px);
+  background-image: repeating-linear-gradient(135deg, rgba(141, 90, 23,0.035) 0 1px, transparent 1px 8px);
 }
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: radial-gradient(125% 90% at 50% 32%, transparent 52%, rgba(0,0,0,0.5));
+  background: radial-gradient(125% 90% at 50% 32%, transparent 52%, rgba(23, 22, 19, 0.07));
 }
 
 /* ---- Hero entrance on load ---- */
@@ -30,7 +30,7 @@
 /* ---- Living gold sheen on the hero headline + page-hero ---- */
 .hero h1 .gold-text,
 .page-hero h1 .gold-text {
-  background: linear-gradient(100deg, #B8932E 0%, #E7C75A 28%, #FBEFC4 50%, #E7C75A 72%, #B8932E 100%);
+  background: linear-gradient(100deg, #8D5A17 0%, #A06A15 28%, #B67A16 50%, #A06A15 72%, #8D5A17 100%);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -46,14 +46,14 @@
 .btn-gold { position: relative; overflow: hidden; }
 .btn-gold::after {
   content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  background: linear-gradient(100deg, transparent, rgba(23, 22, 19, 0.30), transparent);
   transform: skewX(-18deg); transition: left 0.6s ease; pointer-events: none;
 }
 .btn-gold:hover::after { left: 140%; }
 
 /* ---- Price cards: gentle lift + sheen on hover ---- */
 .price-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
-.price-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -24px rgba(216,178,63,0.55); }
+.price-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -24px rgba(141, 90, 23,0.55); }
 
 /* ---- Deco label lines draw in subtly ---- */
 .band-head .deco-label::before,
@@ -61,7 +61,7 @@
 
 /* ---- Smooth focus ring for inputs (a11y polish) ---- */
 .field input:focus, .field select:focus, .quote-form textarea:focus {
-  box-shadow: 0 0 0 3px rgba(216,178,63,0.18);
+  box-shadow: 0 0 0 3px rgba(141, 90, 23,0.18);
 }
 
 /* ---- Nav link underline grow ---- */
@@ -137,7 +137,7 @@ html.js-anim .reveal.in { transform: none; filter: blur(0); }
 .price-card .pc-bars { z-index: 2; }
 .price-card::after {
   content: ""; position: absolute; top: 0; left: -65%; width: 45%; height: 100%; z-index: 1;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  background: linear-gradient(100deg, transparent, rgba(23, 22, 19, 0.30), transparent);
   transform: skewX(-20deg); pointer-events: none;
   animation: card-shine 7s ease-in-out infinite;
 }
@@ -150,7 +150,7 @@ html.js-anim .reveal.in { transform: none; filter: blur(0); }
 .estimator {
   max-width: 480px; margin: 0 auto; background: var(--panel);
   border: 1px solid var(--line); border-radius: 10px; padding: 30px 24px 26px; text-align: center;
-  box-shadow: 0 30px 70px -40px rgba(216,178,63,0.5);
+  box-shadow: 0 30px 70px -40px rgba(141, 90, 23,0.5);
 }
 .est-title { font-family: var(--serif); font-weight: 600; font-size: 2rem; color: var(--cream); margin-top: 12px; line-height: 1.05; }
 .est-sub { color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
@@ -173,7 +173,7 @@ html.js-anim .reveal.in { transform: none; filter: blur(0); }
 }
 .est-weight input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none; width: 26px; height: 26px; border-radius: 50%;
-  background: var(--grad-gold); border: 2px solid #15110a; box-shadow: 0 3px 10px rgba(0,0,0,0.5); cursor: pointer;
+  background: var(--grad-gold); border: 2px solid #15110a; box-shadow: 0 3px 10px rgba(23, 22, 19, 0.18); cursor: pointer;
 }
 .est-weight input[type="range"]::-moz-range-thumb {
   width: 26px; height: 26px; border-radius: 50%; background: var(--grad-gold); border: 2px solid #15110a; cursor: pointer;
@@ -185,7 +185,7 @@ html.js-anim .reveal.in { transform: none; filter: blur(0); }
 .est-badge {
   display: inline-flex; align-items: center; gap: 6px; align-self: center;
   font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); background: rgba(216,178,63,0.12);
+  color: var(--gold); background: rgba(141, 90, 23,0.12);
   border: 1px solid var(--gold); border-radius: 999px; padding: 5px 13px; margin-bottom: 4px;
 }
 .est-badge::before { content: "≈"; font-size: 0.85rem; line-height: 1; }
@@ -231,7 +231,7 @@ html.js-anim .reveal.in { transform: none; filter: blur(0); }
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
-    box-shadow: 0 -10px 30px -12px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 -10px 30px -12px rgba(23, 22, 19, 0.22);
   }
   .mobile-cta a {
     display: inline-flex; align-items: center; justify-content: center; gap: 9px;

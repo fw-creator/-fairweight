@@ -1,6 +1,7 @@
 import { CITIES } from '@/lib/cities';
 
-const BASE = 'https://fairweightdmv.com';
+import { BUSINESS } from '@/lib/business';
+const BASE = BUSINESS.site.canonicalOrigin;
 
 export default function sitemap() {
   const now = new Date();

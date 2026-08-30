@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { BUSINESS, telHref } from '@/lib/business';
 const NAV = [
   { label: 'Home', href: '/' },
   { label: 'Live Prices', href: '/prices' },
@@ -42,7 +43,7 @@ export default function Footer() {
         </nav>
         <div className="foot-meta">
           Fairweight &middot; Hyattsville, MD &middot; Serving the DMV &middot;{' '}
-          <a href="tel:+12408259001">240-825-9001</a>
+          <a href={telHref()}>{BUSINESS.phone.display}</a>
         </div>
       </div>
     </footer>

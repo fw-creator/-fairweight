@@ -1,7 +1,8 @@
+import { BUSINESS } from '@/lib/business';
 export default function robots() {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://fairweightdmv.com/sitemap.xml',
-    host: 'https://fairweightdmv.com',
+    sitemap: `${BUSINESS.site.canonicalOrigin}/sitemap.xml`,
+    host: BUSINESS.site.canonicalOrigin,
   };
 }

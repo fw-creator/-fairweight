@@ -1,37 +1,40 @@
+import { BUSINESS as B } from '@/lib/business';
+
+// Every value here comes from lib/business.js. Facts that are still unverified
+// are omitted rather than invented — notably reviews, licence and email.
 export default function JsonLd() {
   const data = {
     '@context': 'https://schema.org',
     '@type': 'JewelryStore',
-    name: 'Fairweight',
+    name: B.name,
     description:
-      'Mobile gold & silver buyer based in Hyattsville, serving Maryland — Prince George’s and Montgomery County — plus Northern Virginia. Honest weight, fair prices, same-day cash. Se habla español.',
-    slogan: 'Honest Weight. Fair Dealings.',
-    url: 'https://fairweightdmv.com',
-    telephone: '+1-240-825-9001',
+      'Mobile gold & silver buyer based in Hyattsville, serving Maryland, Washington DC and Northern Virginia. We come to you, test and weigh in front of you, and explain the offer. Se habla español.',
+    slogan: B.slogan,
+    url: B.site.canonicalOrigin,
+    telephone: B.phone.tel,
     priceRange: '$$',
-    image: 'https://fairweightdmv.com/og-image.png',
+    image: `${B.site.canonicalOrigin}/hero-evaluation.png`,
+    founder: { '@type': 'Person', name: B.owner, jobTitle: B.ownerRole },
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Hyattsville',
-      addressRegion: 'MD',
-      addressCountry: 'US',
+      addressLocality: B.address.locality,
+      addressRegion: B.address.region,
+      addressCountry: B.address.country,
     },
-    areaServed: [
-      { '@type': 'AdministrativeArea', name: 'Hyattsville, MD' },
-      { '@type': 'AdministrativeArea', name: "Prince George's County, MD" },
-      { '@type': 'AdministrativeArea', name: 'Montgomery County, MD' },
-      { '@type': 'AdministrativeArea', name: 'Maryland' },
-      { '@type': 'AdministrativeArea', name: 'Northern Virginia' },
-    ],
-    knowsLanguage: ['en', 'es'],
-    knowsAbout: ['Gold buying', 'Silver buying', 'Platinum buying', 'Bullion', 'Coins', 'Estate jewelry'],
+    areaServed: B.areaServed.map((name) => ({ '@type': 'AdministrativeArea', name })),
+    knowsLanguage: B.languages,
+    knowsAbout: B.buys,
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '08:00',
-      closes: '20:00',
+      opens: B.hours.opens,
+      closes: B.hours.closes,
     },
-    sameAs: [],
+    // Only emitted once the corresponding fact is confirmed in lib/business.js.
+    ...(B.email ? { email: B.email } : {}),
+    ...(Object.values(B.social).some(Boolean)
+      ? { sameAs: Object.values(B.social).filter(Boolean) }
+      : {}),
   };
 
   return (

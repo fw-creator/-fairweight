@@ -2,9 +2,18 @@ import Link from 'next/link';
 import DmvMapClient from '@/components/DmvMapClient';
 import { CITIES } from '@/lib/cities';
 
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'Service Area — Serving the Entire DMV | Fairweight',
-  description: 'Fairweight is a mobile gold and silver buyer serving Maryland, Washington DC and Northern Virginia. Based in Hyattsville, MD. Call or text 240-825-9001.',
+  alternates: {
+    canonical: '/area',
+    languages: {
+      'en-US': '/area',
+      'es-US': '/es/area',
+      'x-default': '/area',
+    },
+  },
+  title: 'Service Area — Serving the Entire DMV',
+  description: `Fairweight is a mobile gold and silver buyer serving Maryland, Washington DC and Northern Virginia. Based in Hyattsville, MD. Call or text ${BUSINESS.phone.display}.`,
 };
 
 const COLS = [
@@ -40,7 +49,7 @@ export default function AreaPage() {
                 <ul>{cities.map((c) => <li key={c}>{c}</li>)}</ul>
               </div>
             ))}
-            <p className="area-note">Don&rsquo;t see your neighborhood? We likely still cover it &mdash; <a href="tel:+12408259001">call or text 240-825-9001</a>.</p>
+            <p className="area-note">Don&rsquo;t see your neighborhood? We likely still cover it &mdash; <a href={telHref()}>call or text {BUSINESS.phone.display}</a>.</p>
           </div>
         </div>
         <div className="wrap" style={{ marginTop: 42 }}>

@@ -1,17 +1,18 @@
 import Link from 'next/link';
 
+import { BUSINESS, telHref } from '@/lib/business';
 const T = {
   en: {
     eyebrow: 'Maryland · We Come To You',
     h1a: 'Sell Gold & Silver in',
     sub: 'Honest weight, fair prices, same-day cash — anywhere in',
-    callBtn: 'Call or Text: 240-825-9001',
+    callBtn: `Call or Text: ${BUSINESS.phone.display}`,
     quoteBtn: 'Get a Free Quote',
     weBuyTitle: 'What we buy in',
     weBuy: ['Gold jewelry & chains', 'Gold & silver coins', 'Bullion bars & rounds', 'Broken & scrap gold', 'Sterling silver & flatware', 'Platinum & dental gold'],
     howTitle: 'How it works',
     steps: [
-      ['Call or text', 'Tell us what you have at 240-825-9001.'],
+      ['Call or text', `Tell us what you have at ${BUSINESS.phone.display}.`],
       ['We come to you', 'We meet you and weigh everything openly.'],
       ['Get paid cash', 'Accept the offer and walk away with cash.'],
     ],
@@ -24,13 +25,13 @@ const T = {
     eyebrow: 'Maryland · Vamos a Usted',
     h1a: 'Compramos Oro y Plata en',
     sub: 'Peso honesto, precios justos, efectivo el mismo día — en todo',
-    callBtn: 'Llame o Texto: 240-825-9001',
+    callBtn: `Llame o Texto: ${BUSINESS.phone.display}`,
     quoteBtn: 'Cotización Gratis',
     weBuyTitle: 'Qué compramos en',
     weBuy: ['Joyas y cadenas de oro', 'Monedas de oro y plata', 'Lingotes y barras', 'Oro roto y chatarra', 'Plata esterlina y cubiertos', 'Platino y oro dental'],
     howTitle: 'Cómo funciona',
     steps: [
-      ['Llame o texto', 'Díganos qué tiene al 240-825-9001.'],
+      ['Llame o texto', `Díganos qué tiene al ${BUSINESS.phone.display}.`],
       ['Vamos a usted', 'Lo encontramos y pesamos todo abiertamente.'],
       ['Reciba efectivo', 'Acepte la oferta y váyase con su dinero.'],
     ],
@@ -53,7 +54,7 @@ export default function CityPage({ city, lang = 'en' }) {
         <h1>{t.h1a} <span className="gold-text">{city.name}</span></h1>
         <p>{t.sub} {city.name}, {city.county}. {c.lede}</p>
         <div className="hero-actions" style={{ justifyContent: 'center', marginTop: 28 }}>
-          <a className="btn-gold" href="tel:+12408259001">
+          <a className="btn-gold" href={telHref()}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
             {t.callBtn}
           </a>
@@ -70,7 +71,7 @@ export default function CityPage({ city, lang = 'en' }) {
             <strong>{city.name}</strong>
             <span>{c.body}</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>{BUSINESS.phone.display}</a>
         </div>
       </section>
 
@@ -114,9 +115,9 @@ export default function CityPage({ city, lang = 'en' }) {
           <p className="sub" style={{ marginTop: 14 }}>{c.nearby}</p>
           <h2 style={{ marginTop: 28 }}>{t.ctaTitle} <span className="gold-text">{city.name}?</span></h2>
           <p className="sub">{t.ctaSub}</p>
-          <a className="phone-btn" href="tel:+12408259001">
+          <a className="phone-btn" href={telHref()}>
             <span className="label">{lang === 'es' ? 'Llame o Texto' : 'Call or Text'}</span>
-            <span className="number">240-825-9001</span>
+            <span className="number">{BUSINESS.phone.display}</span>
           </a>
           <p className="loc"><Link href={areaHref} style={{ color: 'var(--gold)' }}>{t.backArea} →</Link></p>
         </div>

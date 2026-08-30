@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og';
 
+import { BUSINESS } from '@/lib/business';
 export const alt = 'Fairweight — We Buy & Sell Gold & Silver | Mobile, DMV';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
@@ -67,7 +68,7 @@ export default function OgImage() {
           <span style={{ color: '#E7C75A' }}>Gold &amp; Silver</span>
         </div>
         <div style={{ fontSize: 30, marginTop: 22, color: '#cdbf9c' }}>
-          Mobile · Serving Maryland &amp; the DMV · 240-825-9001
+          {`Mobile · Serving Maryland & the DMV · ${BUSINESS.phone.display}`}
         </div>
       </div>
     ),

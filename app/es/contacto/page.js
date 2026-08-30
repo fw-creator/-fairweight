@@ -2,10 +2,11 @@ import QuoteForm from '@/components/QuoteForm';
 import FaqAccordion from '@/components/FaqAccordion';
 import { FAQS_ES, faqSchema } from '@/lib/faqs';
 
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'Contacto — Llame o Texto 240-825-9001 | Fairweight',
-  description: 'Reciba una cotización gratis y sin compromiso de Fairweight. Comprador móvil de oro y plata en Maryland. Llame o texto 240-825-9001 para efectivo el mismo día. Hablamos español.',
-  alternates: { canonical: '/es/contacto', languages: { 'en-US': '/contact', 'es-US': '/es/contacto' } },
+  title: `Contacto — Llame o Texto ${BUSINESS.phone.display}`,
+  description: `Reciba una cotización gratis y sin compromiso de Fairweight. Comprador móvil de oro y plata en Maryland. Llame o texto ${BUSINESS.phone.display} para efectivo el mismo día. Hablamos español.`,
+  alternates: { canonical: '/es/contacto', languages: { 'en-US': '/contact', 'es-US': '/es/contacto', 'x-default': '/contact' } },
 };
 
 export default function ContactoEs() {
@@ -27,7 +28,7 @@ export default function ContactoEs() {
             <strong>Vamos a Usted &mdash; Sin Tienda Necesaria</strong>
             <span>Compra de oro y plata totalmente móvil en toda Maryland. Cotizaciones gratis en su puerta.</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">Llame o Texto 240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>Llame o Texto {BUSINESS.phone.display}</a>
         </div>
       </section>
 
@@ -46,7 +47,7 @@ export default function ContactoEs() {
             </ul>
             <div className="quote-phone">
               <span className="small">Llame o Texto</span>
-              <a href="tel:+12408259001">240-825-9001</a>
+              <a href={telHref()}>{BUSINESS.phone.display}</a>
             </div>
           </div>
           <QuoteForm lang="es" />
@@ -68,9 +69,9 @@ export default function ContactoEs() {
           <span className="deco-label center">Cuando Esté Listo</span>
           <h2 style={{ marginTop: 18 }}>Convierta oro y plata<br />en <span className="gold-text">efectivo hoy</span></h2>
           <p className="sub">Llámenos o envíe un texto — vamos a usted con una cotización justa, sin presión.</p>
-          <a className="phone-btn" href="tel:+12408259001">
+          <a className="phone-btn" href={telHref()}>
             <span className="label">Llame o Texto</span>
-            <span className="number">240-825-9001</span>
+            <span className="number">{BUSINESS.phone.display}</span>
           </a>
           <p className="loc">Hyattsville, MD &middot; Sirviendo Maryland y el área</p>
         </div>

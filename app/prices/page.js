@@ -1,9 +1,18 @@
 import PriceCards from '@/components/PriceCards';
 import Calculator from '@/components/Calculator';
 
+import { BUSINESS } from '@/lib/business';
 export const metadata = {
-  title: 'Live Gold & Silver Spot Prices — Fairweight',
-  description: 'Live gold, silver and platinum spot prices plus a value calculator. Fairweight buys gold & silver across the DMV. Call or text 240-825-9001.',
+  alternates: {
+    canonical: '/prices',
+    languages: {
+      'en-US': '/prices',
+      'es-US': '/es/precios',
+      'x-default': '/prices',
+    },
+  },
+  title: 'Live Gold & Silver Spot Prices',
+  description: `Live gold, silver and platinum spot prices plus a value calculator. Fairweight buys gold & silver across the DMV. Call or text ${BUSINESS.phone.display}.`,
 };
 
 export default function PricesPage() {

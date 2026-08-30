@@ -1,9 +1,10 @@
 import Link from 'next/link';
 
+import { BUSINESS, telHref } from '@/lib/business';
 export const metadata = {
-  title: 'Qué Compramos — Oro, Plata y Platino | Fairweight',
-  description: 'Fairweight compra oro, plata y platino en cualquier forma — monedas, lingotes, joyas, cadenas, chatarra y piezas rotas — en toda Maryland. Llame o texto 240-825-9001.',
-  alternates: { canonical: '/es/que-compramos', languages: { 'en-US': '/buy', 'es-US': '/es/que-compramos' } },
+  title: 'Qué Compramos — Oro, Plata y Platino',
+  description: `Fairweight compra oro, plata y platino en cualquier forma — monedas, lingotes, joyas, cadenas, chatarra y piezas rotas — en toda Maryland. Llame o texto ${BUSINESS.phone.display}.`,
+  alternates: { canonical: '/es/que-compramos', languages: { 'en-US': '/buy', 'es-US': '/es/que-compramos', 'x-default': '/buy' } },
 };
 
 const GALLERY = [
@@ -39,7 +40,7 @@ export default function QueCompramosEs() {
             <strong>Vamos a Usted &mdash; Sin Tienda Necesaria</strong>
             <span>Compra de oro y plata totalmente móvil en toda Maryland. Cotizaciones gratis en su puerta.</span>
           </span>
-          <a className="ms-cta" href="tel:+12408259001">Llame o Texto 240-825-9001</a>
+          <a className="ms-cta" href={telHref()}>Llame o Texto {BUSINESS.phone.display}</a>
         </div>
       </section>
 
@@ -74,7 +75,7 @@ export default function QueCompramosEs() {
               ))}
             </ul>
             <div className="bullion-actions" style={{ marginTop: 28 }}>
-              <a className="btn-gold" href="tel:+12408259001">Cotización Gratis</a>
+              <a className="btn-gold" href={telHref()}>Cotización Gratis</a>
               <Link className="btn-ghost" href="/es/precios">Estimar Valor</Link>
             </div>
           </div>
@@ -90,7 +91,7 @@ export default function QueCompramosEs() {
           </div>
           <div className="steps">
             {[
-              ['01', 'Contáctenos', 'Llame o texto al 240-825-9001 y díganos qué tiene.'],
+              ['01', 'Contáctenos', `Llame o texto al ${BUSINESS.phone.display} y díganos qué tiene.`],
               ['02', 'Vamos a Usted', 'Lo encontramos, pesamos sus artículos abiertamente, y damos una cotización justa.'],
               ['03', 'Reciba Efectivo', 'Acepte la oferta y váyase con efectivo en mano — la misma visita.'],
             ].map(([n, h, p]) => (
