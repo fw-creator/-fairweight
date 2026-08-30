@@ -1800,3 +1800,76 @@ html.js-anim .reveal.in { opacity: 1; transform: none; }
   color: #17150F !important;
 }
 .home-section.estimator-section .estimator .est-sub { color: #5F594F !important; }
+
+/* ============================================================
+   MOTION — derived from the trade, not applied as a blanket fade.
+   A balance settles: weight arrives, overshoots slightly, comes to rest.
+   Everything below is scroll-linked CSS. No library, no observer, no JS.
+   Gated behind @supports so browsers without scroll timelines simply show
+   the content — nothing can end up stuck invisible.
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* --- The rail: a hallmark travels the process as you scroll it --- */
+    .process-grid { position: relative; }
+    .process-grid::before {
+      content: ""; position: absolute; top: 34px; left: 8%; right: 8%;
+      height: 1px; background: rgba(141, 90, 23, 0.26); z-index: 0;
+    }
+    .process-grid::after {
+      content: ""; position: absolute; top: 30px; left: 8%;
+      width: 9px; height: 9px; background: #B67A16;
+      transform: rotate(45deg); z-index: 1;
+      animation: fw-rail linear both;
+      animation-timeline: view();
+      animation-range: entry 30% cover 62%;
+    }
+    @keyframes fw-rail { from { left: 8%; } to { left: calc(92% - 9px); } }
+    .process-grid > * { position: relative; z-index: 2; }
+
+    /* --- Weighted arrival: heavier elements land first, lighter follow.
+           A short overshoot, then rest — the motion of a beam settling. --- */
+    .process-grid > *,
+    .buy-rail > .buy-card,
+    .ease-grid > * {
+      animation: fw-settle cubic-bezier(0.22, 1.24, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 8% entry 58%;
+    }
+    @keyframes fw-settle {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Stagger so they don't arrive as one block. */
+    .process-grid > *:nth-child(2),
+    .buy-rail > .buy-card:nth-child(2n) { animation-range: entry 14% entry 64%; }
+    .process-grid > *:nth-child(3),
+    .buy-rail > .buy-card:nth-child(3n) { animation-range: entry 20% entry 70%; }
+
+    /* --- Section headings carry the most weight, so they arrive first --- */
+    .home-section-head {
+      animation: fw-settle cubic-bezier(0.22, 1.18, 0.36, 1) both;
+      animation-timeline: view();
+      animation-range: entry 4% entry 46%;
+    }
+  }
+}
+
+/* --- Hover: the card takes weight under the cursor. Works everywhere,
+       no scroll timeline needed, and only on devices with a real pointer. --- */
+@media (hover: hover) and (pointer: fine) {
+  .buy-card {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.28s ease, box-shadow 0.28s ease;
+  }
+  .buy-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(182, 122, 22, 0.55);
+    box-shadow: 0 10px 26px rgba(23, 22, 19, 0.10);
+  }
+  .buy-card:hover :is(strong, h3) { color: #8D5A17; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .buy-card, .buy-card:hover { transition: none; transform: none; }
+}
