@@ -859,12 +859,7 @@ html.js-anim .reveal.in { opacity: 1; transform: none; }
 /* ---------- HERO: copy column + image panel ---------- */
 .hsp-frame img { display: block; width: 100%; height: auto; }
 
-@media (max-width: 980px) {
-  @media (max-width: 560px) {
-  .hsp-copy .hero-actions { width: 100%; display: grid; gap: 10px; }
-  .hsp-copy .hero-actions > * { width: 100%; justify-content: center; text-align: center; }
-  .hsp-frame img { aspect-ratio: 4 / 3; }
-}
+
 
 /* Hero CTAs: primary and phone sit side by side, wrapping only when they must. */
 .hsp-copy .hero-actions {
@@ -942,11 +937,7 @@ html.js-anim .reveal.in { opacity: 1; transform: none; }
 }
 .hsp-copy .btn-call:hover { border-color: var(--gold); }
 
-@media (max-width: 980px) {
-  /* Copy first, then a controlled image band — not a tall crop. */
-  @media (max-width: 560px) {
-  .hsp-frame img { height: 240px; object-position: 64% 62%; }
-}
+
 
 /* ---------- MEET YOUR BUYER — monogram, not a fabricated portrait ---------- */
 .monogram {
