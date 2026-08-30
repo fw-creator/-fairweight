@@ -1661,3 +1661,142 @@ html.js-anim .reveal.in { opacity: 1; transform: none; }
 @media (min-width: 1200px) {
   .home-intro h1 { font-size: clamp(3.5rem, 3.9vw, 4.35rem); }
 }
+
+/* ============================================================
+   SECTION CONTRAST
+   Seven of nine sections were within 17 points of the same cream,
+   so the page read as one flat colour. This restores the alternation
+   the brief called for: warm-black founder and calculator sections,
+   and genuinely distinct stone bands between them.
+   ============================================================ */
+.buyer-section,
+.estimator-section {
+  background: #171613;
+  color: #F6F0E6;
+}
+
+/* Headings and emphasis go light. */
+.buyer-section h2, .buyer-section h3, .buyer-section h4, .buyer-section strong,
+.estimator-section h2, .estimator-section h3, .estimator-section h4, .estimator-section strong,
+.buyer-section .est-title, .estimator-section .est-title {
+  color: #F8F4EC;
+}
+/* Body copy sits back, but stays comfortably readable. */
+.buyer-section p, .buyer-section small, .buyer-section li,
+.estimator-section p, .estimator-section small, .estimator-section li,
+.buyer-section .est-sub, .estimator-section .est-sub {
+  color: rgba(246, 240, 230, 0.76);
+}
+/* Eyebrows and links take the lighter gold so they read on black. */
+.buyer-section .section-eyebrow, .estimator-section .section-eyebrow,
+.buyer-section .deco-label, .estimator-section .deco-label,
+.buyer-section .text-link, .estimator-section .text-link,
+.buyer-section a, .estimator-section a {
+  color: #D9A63F;
+}
+.buyer-section .text-link:hover, .estimator-section a:hover { color: #EFC468; }
+
+/* Pale chips inside the founder block need a dark-ground equivalent. */
+.buyer-section span[class=""],
+.buyer-section .home-badge,
+.buyer-section .buyer-tag {
+  background: rgba(217, 166, 63, 0.14) !important;
+  color: #E6BC63 !important;
+  border-color: rgba(217, 166, 63, 0.34) !important;
+}
+
+/* Calculator controls on the dark ground. */
+.estimator-section .est-card,
+.estimator-section .calc-card,
+.estimator-section .est-value-wrap {
+  background: rgba(246, 240, 230, 0.05);
+  border-color: rgba(246, 240, 230, 0.16);
+}
+.estimator-section .est-chip {
+  color: #F1EADD;
+  border-color: rgba(246, 240, 230, 0.26);
+  background: rgba(246, 240, 230, 0.05);
+}
+.estimator-section .est-chip:hover { border-color: rgba(217, 166, 63, 0.6); }
+.estimator-section .est-chip.on {
+  background: #B67A16;
+  color: #17150F;
+  border-color: #B67A16;
+}
+.estimator-section input[type="range"] { accent-color: #D9A63F; }
+.estimator-section .est-value,
+.estimator-section .est-value-label { color: #E6BC63; }
+
+/* Stone bands: pull them far enough from the ivory to actually register. */
+.process-section { background: #E4D8C4; }
+.local-section { background: #E4D8C4; }
+
+/* Hairlines and dividers inside the dark sections. */
+.buyer-section hr, .estimator-section hr,
+.buyer-section [class*="divider"], .estimator-section [class*="divider"] {
+  border-color: rgba(246, 240, 230, 0.14);
+}
+
+/* Contrast enforcement on the two inverted sections.
+   The first pass lost on specificity to more targeted rules, leaving
+   "Jonathan or his wife" at a 1.19 ratio — effectively invisible. */
+.home-section.buyer-section :is(h1,h2,h3,h4,strong,b,.est-title),
+.home-section.estimator-section :is(h1,h2,h3,h4,strong,b,.est-title) {
+  color: #F8F4EC;
+}
+.home-section.buyer-section :is(p,li,small,figcaption,.est-sub,.home-lede),
+.home-section.estimator-section :is(p,li,small,figcaption,.est-sub,.home-lede) {
+  color: rgba(246, 240, 230, 0.80);
+}
+/* Loose spans and labels that carry no class of their own. */
+.home-section.buyer-section span:not([class]),
+.home-section.estimator-section span:not([class]),
+.home-section.estimator-section label,
+.home-section.estimator-section .est-row span,
+.home-section.estimator-section .est-label {
+  color: rgba(246, 240, 230, 0.80);
+}
+.home-section.buyer-section :is(.section-eyebrow,.deco-label,.text-link,a),
+.home-section.estimator-section :is(.section-eyebrow,.deco-label,.text-link,a) {
+  color: #E0AE49;
+}
+
+/* Pale cards keep their light ground on the dark section — that contrast is
+   the point. Their text must stay dark, or it disappears into them. */
+.home-section.buyer-section .buyer-promises span,
+.home-section.buyer-section .buyer-mark,
+.home-section.buyer-section .buyer-mark *,
+.home-section.estimator-section .est-card .est-chip.on,
+.home-section.estimator-section [class*="badge"]:not([class*="dark"]) {
+  color: #2A2118;
+}
+.home-section.buyer-section .buyer-promises span { border-color: rgba(42, 33, 24, 0.18); }
+
+/* The calculator is a white card floating on the black section — that
+   contrast is deliberate. Its contents must read dark-on-light.
+   !important here because the section-wide light-text rules carry higher
+   specificity than any descendant selector I can write against them. */
+.home-section.estimator-section .estimator :is(h1,h2,h3,h4,.est-title,strong,b) { color: #17150F !important; }
+.home-section.estimator-section .estimator :is(p,small,label,li,.est-sub) { color: #6E675C !important; }
+.home-section.estimator-section .estimator span:not([class]) { color: #6E675C !important; }
+.home-section.estimator-section .estimator .deco-label { color: #8D5A17 !important; }
+.home-section.estimator-section .estimator .est-chip { color: #17150F !important; border-color: rgba(23,22,19,0.22) !important; background: transparent !important; }
+.home-section.estimator-section .estimator .est-chip.on { color: #17150F !important; background: #B67A16 !important; border-color: #B67A16 !important; }
+.home-section.estimator-section .estimator .est-value,
+.home-section.estimator-section .estimator .est-value-label { color: #8D5A17 !important; }
+.home-section.estimator-section .estimator .est-card,
+.home-section.estimator-section .estimator .est-value-wrap { background: transparent !important; border-color: rgba(23,22,19,0.14) !important; }
+
+/* Same for the pale monogram card in the founder section. */
+.home-section.buyer-section .buyer-mark,
+.home-section.buyer-section .buyer-mark *,
+.home-section.buyer-section .buyer-promises span { color: #2A2118 !important; }
+
+/* The gold CTA inside the calculator needs dark text — the section-wide
+   link rule had turned it gold-on-gold. */
+.home-section.estimator-section .estimator .btn-gold,
+.home-section.estimator-section .estimator a.est-cta,
+.home-section.buyer-section .btn-gold {
+  color: #17150F !important;
+}
+.home-section.estimator-section .estimator .est-sub { color: #5F594F !important; }
