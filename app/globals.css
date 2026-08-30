@@ -1637,3 +1637,27 @@ html.js-anim .reveal.in { opacity: 1; transform: none; }
 @media (max-width: 390px) {
   .hero-trust { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   DESKTOP HEADLINE — mobile is untouched; this only applies ≥900px.
+   At 88px in a 588px column the H1 broke into five lines, stranding
+   "in" and "MD." on their own. Widen the copy column and bring the
+   type down so it settles into two.
+   ============================================================ */
+@media (min-width: 900px) {
+  .home-intro-inner {
+    grid-template-columns: minmax(0, 1.22fr) minmax(340px, 0.78fr);
+    gap: 48px;
+  }
+  .home-intro h1 {
+    font-size: clamp(3.1rem, 4.5vw, 4.05rem);
+    line-height: 1.02;
+    letter-spacing: -0.038em;
+    max-width: 15ch;
+    text-wrap: balance;
+  }
+  .home-intro .home-lede { max-width: 46ch; }
+}
+@media (min-width: 1200px) {
+  .home-intro h1 { font-size: clamp(3.5rem, 3.9vw, 4.35rem); }
+}
