@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Estimator from '@/components/Estimator';
 import FaqAccordion from '@/components/FaqAccordion';
+import ProcessJourney from '@/components/ProcessJourney';
 import { BUSINESS, telHref } from '@/lib/business';
 
 export const metadata = {
@@ -75,22 +76,20 @@ export default function HomePage() {
       <section className="home-section buy-section" id="what-we-buy">
         <div className="wrap">
           <SectionHeading eyebrow="What We Buy" title="Gold, silver, broken or forgotten." text="If it contains precious metal, it may still have value. We test every item and explain what you have." />
-          <div className="buy-rail" aria-label="Items Fairweight buys">
-            {BUY_CARDS.map((item) => <article className="buy-card" key={item.title}><div className="buy-symbol">{item.symbol}</div><span className="buy-meta">{item.meta}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}
+          <div className="buy-vitrine">
+            <Image className="buy-vitrine-image" src="/images/what-we-buy-vitrine.png" alt="Gold jewelry, silver, coins, platinum and estate items Fairweight buys" fill sizes="(max-width: 760px) calc(100vw - 40px), 1100px" />
+            <div className="buy-vitrine-label"><span>Au</span><strong>Jewelry, coins<br />and collections</strong></div>
+            <div className="buy-rail" aria-label="Items Fairweight buys">
+              {BUY_CARDS.map((item) => <article className="buy-card" key={item.title}><div className="buy-symbol">{item.symbol}</div><div><span className="buy-meta">{item.meta}</span><h3>{item.title}</h3></div></article>)}
+            </div>
           </div>
-          <div className="section-actions"><Link className="home-secondary compact" href="/buy">See Everything We Buy</Link><a className="text-link" href={telHref()}>Not sure what you have? Call or text us <span>→</span></a></div>
+          <div className="section-actions"><Link className="home-secondary compact" href="/buy">See Everything We Buy <span>→</span></Link><a className="text-link" href={telHref()}>Not sure what you have? Call or text us</a></div>
         </div>
       </section>
 
       <section className="home-section process-section" id="how-it-works">
         <div className="wrap">
-          <SectionHeading eyebrow="Simple From Start to Finish" title="A private gold evaluation in three steps." />
-          <div className="process-grid">
-            <article><span className="process-num">01</span><h3>Call or Schedule</h3><p>Tell us roughly what you have and choose a convenient time and meeting place.</p></article>
-            <article><span className="process-num">02</span><h3>We Test &amp; Weigh</h3><p>Every item is checked in front of you. The scale stays visible throughout the evaluation.</p></article>
-            <article><span className="process-num">03</span><h3>You Decide</h3><p>We explain the offer clearly. Accept it or keep your items—there is no obligation.</p></article>
-          </div>
-          <Link className="home-primary process-cta" href="/contact">Schedule an Evaluation</Link>
+          <ProcessJourney />
         </div>
       </section>
 
